@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">InstalledApps</string>
+
+    <string name="error_general">Ups, something went wrong!</string>
+    <string name="no_apps_installed_message">There are no Outfit7 apps installed.</string>
+
+    <string name="detail_open_app">Open app</string>
+</resources>
