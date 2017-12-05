@@ -22,7 +22,8 @@ public class InstalledAppsRetriever {
      * @return
      * @throws PackageManager.NameNotFoundException
      */
-    public List<InstalledApp> retrieveInstalledApps(String packageToFind, PackageManager packageManager) throws PackageManager.NameNotFoundException {
+    public List<InstalledApp> retrieveInstalledApps(String packageToFind, PackageManager packageManager)
+            throws PackageManager.NameNotFoundException {
         final List<InstalledApp> installedApps = new ArrayList<>();
 
         List<ApplicationInfo> packages = packageManager.getInstalledApplications(PackageManager.GET_META_DATA);
@@ -44,7 +45,8 @@ public class InstalledAppsRetriever {
      * @return
      * @throws PackageManager.NameNotFoundException
      */
-    public InstalledApp retrieveInstalledApp(String packageName, PackageManager packageManager) throws PackageManager.NameNotFoundException {
+    public InstalledApp retrieveInstalledApp(String packageName, PackageManager packageManager)
+            throws PackageManager.NameNotFoundException {
         ApplicationInfo appInfo = packageManager.getApplicationInfo(packageName, 0);
         return extractAppDetails(appInfo, packageManager);
     }
@@ -57,7 +59,8 @@ public class InstalledAppsRetriever {
      * @return
      * @throws PackageManager.NameNotFoundException
      */
-    private InstalledApp extractAppDetails(ApplicationInfo appInfo, PackageManager packageManager) throws PackageManager.NameNotFoundException {
+    private InstalledApp extractAppDetails(ApplicationInfo appInfo, PackageManager packageManager)
+            throws PackageManager.NameNotFoundException {
         PackageInfo packageInfo = packageManager.getPackageInfo(appInfo.packageName, 0);
         return new InstalledApp(appInfo.loadLabel(packageManager).toString(),
                 appInfo.packageName, packageInfo.versionCode,

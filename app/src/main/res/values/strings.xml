@@ -5,4 +5,6 @@
     <string name="no_apps_installed_message">There are no Outfit7 apps installed.</string>
 
     <string name="detail_open_app">Open app</string>
+    <string name="detail_version_code">Version code: %d</string>
+    <string name="detail_version_name">Version name: %s</string>
 </resources>

@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +36,13 @@ public class AppDetailActivity extends AppCompatActivity implements AppDetailCon
 
     private AppDetailContract.Presenter presenter;
 
+    /**
+     * Constructs an intent for starting this Activity.
+     *
+     * @param context
+     * @param packageName
+     * @return
+     */
     public static Intent createLaunchIntent(Context context, String packageName) {
         Intent intent = new Intent(context, AppDetailActivity.class);
         intent.putExtra(EXTRA_APP_PACKAGE_NAME, packageName);
@@ -44,8 +53,16 @@ public class AppDetailActivity extends AppCompatActivity implements AppDetailCon
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_detail);
+        setupToolbar();
         ButterKnife.bind(this);
         initPresenter();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // only back button is supported
+        finish();
+        return true;
     }
 
     @OnClick(R.id.detail_open_button)
@@ -69,19 +86,31 @@ public class AppDetailActivity extends AppCompatActivity implements AppDetailCon
     }
 
     @Override
-    public void showVersionCode(String versionCode) {
-        versionCodeTextView.setText(versionCode);
+    public void showVersionCode(int versionCode) {
+        versionCodeTextView.setText(getString(R.string.detail_version_code, versionCode));
     }
 
     @Override
     public void showVersionNumber(String versionNumber) {
-        versionNameTextView.setText(versionNumber);
+        versionNameTextView.setText(getString(R.string.detail_version_name, versionNumber));
     }
 
     @Override
     public void launchApp(String appPackageName) {
-        startActivity(getPackageManager().getLaunchIntentForPackage(appPackageName));
+        Intent launchIntent = getPackageManager().getLaunchIntentForPackage(appPackageName);
+        if (launchIntent != null) {
+            startActivity(launchIntent);
+        } else {
+            Toast.makeText(this, R.string.error_general, Toast.LENGTH_SHORT).show();
+        }
     }
+
+    private void setupToolbar() {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
 
     private void initPresenter() {
         presenter = new AppDetailPresenter();

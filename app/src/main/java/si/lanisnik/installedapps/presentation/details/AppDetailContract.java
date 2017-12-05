@@ -13,13 +13,14 @@ import si.lanisnik.installedapps.presentation.base.BaseView;
 public interface AppDetailContract {
 
     interface View extends BaseView {
+
         void showIcon(Drawable drawable);
 
         void showName(String name);
 
         void showPackageName(String packageName);
 
-        void showVersionCode(String versionCode);
+        void showVersionCode(int versionCode);
 
         void showVersionNumber(String versionNumber);
 

@@ -46,7 +46,7 @@ public class AppDetailPresenter implements AppDetailContract.Presenter {
             view.get().showIcon(appDetails.getIcon());
             view.get().showName(appDetails.getName());
             view.get().showPackageName(appDetails.getPackageName());
-            view.get().showVersionCode(String.valueOf(appDetails.getVersionCode()));
+            view.get().showVersionCode(appDetails.getVersionCode());
             view.get().showVersionNumber(appDetails.getVersionName());
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
