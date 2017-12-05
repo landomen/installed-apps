@@ -59,6 +59,12 @@ public class AppDetailActivity extends AppCompatActivity implements AppDetailCon
     }
 
     @Override
+    protected void onDestroy() {
+        presenter.destroy();
+        super.onDestroy();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // only back button is supported
         finish();
